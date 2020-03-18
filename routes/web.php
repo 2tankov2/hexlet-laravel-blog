@@ -26,3 +26,6 @@ Route::get('/articles', 'ArticleController@index')
 
 Route::get('/rating', 'RatingController@index')
     ->name('rating.index');
+
+Route::get('/articles/{id}', 'ArticleController@show')
+    ->name('articles.show');
