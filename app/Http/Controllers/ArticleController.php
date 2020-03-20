@@ -21,4 +21,62 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
         return view('article.show', compact('article'));
     }
+
+    // Вывод формы
+    public function create()
+    {
+        // Передаём в шаблон вновь созданный объект. Он нужен для вывода формы через Form::model
+        $article = new Article();
+        return view('article.create', compact('article'));
+    }
+
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('article.edit', compact('article'));
+    }
+
+    // Здесь нам понадобится объект запроса для извлечения данных
+    public function store(Request $request)
+    {
+        // Проверка введённых данных
+        // Если будут ошибки, то возникнет исключение
+        $this->validate($request, [
+            'name' => 'required|unique:articles',
+            'body' => 'required|min:50',
+            'state' => [
+                'required',
+                Rule::in(['draft', 'published']),
+            ]
+        ]);
+
+        $article = new Article();
+        // Заполнение статьи данными из формы
+        $article->fill($request->all());
+        // При ошибках сохранения возникнет исключение
+        $article->save();
+
+        // Редирект на указанный маршрут с добавлением флеш-сообщения
+        return redirect()->route('articles.index')->with('success','Article created!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        $this->validate($request, [
+        // У обновления немного изменённая валидация. В проверку уникальности добавляется название поля и id текущего объекта
+        // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
+            'name' => 'required|unique:articles,name,' . $article->id,
+            'body' => 'required|min:100',
+            'state' => [
+                'required',
+                Rule::in(['draft', 'published']),
+            ]
+        ]);
+
+        $article->fill($request->all());
+        $article->save();
+        return redirect()
+            ->route('articles.index')->with('success','Article update!');
+    }
 }

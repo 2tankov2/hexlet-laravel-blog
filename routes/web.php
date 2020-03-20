@@ -27,5 +27,19 @@ Route::get('/articles', 'ArticleController@index')
 Route::get('/rating', 'RatingController@index')
     ->name('rating.index');
 
+Route::get('/articles/create', 'ArticleController@create')
+    ->name('articles.create');
+
+Route::post('/articles', 'ArticleController@store')
+    ->name('articles.store');
+
+Route::get('/articles/{id}/edit', 'ArticleController@edit')
+    ->name('articles.edit');
+
+Route::patch('/articles/{id}', 'ArticleController@update')
+    ->name('articles.update');
+
 Route::get('/articles/{id}', 'ArticleController@show')
     ->name('articles.show');
+
+
