@@ -42,4 +42,5 @@ Route::patch('/articles/{id}', 'ArticleController@update')
 Route::get('/articles/{id}', 'ArticleController@show')
     ->name('articles.show');
 
-
+Route::delete('/articles/{id}', 'ArticleController@destroy')
+    ->name('articles.destroy');
