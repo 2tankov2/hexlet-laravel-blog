@@ -43,11 +43,7 @@ class ArticleController extends Controller
         // Если будут ошибки, то возникнет исключение
         $this->validate($request, [
             'name' => 'required|unique:articles',
-            'body' => 'required|min:50',
-            'state' => [
-                'required',
-                Rule::in(['draft', 'published']),
-            ]
+            'body' => 'required|min:20',
         ]);
 
         $article = new Article();
@@ -67,11 +63,7 @@ class ArticleController extends Controller
         // У обновления немного изменённая валидация. В проверку уникальности добавляется название поля и id текущего объекта
         // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
             'name' => 'required|unique:articles,name,' . $article->id,
-            'body' => 'required|min:100',
-            'state' => [
-                'required',
-                Rule::in(['draft', 'published']),
-            ]
+            'body' => 'required|min:20',
         ]);
 
         $article->fill($request->all());

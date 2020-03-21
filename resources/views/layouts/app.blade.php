@@ -14,6 +14,7 @@
         <div>
             <a href=" {{ route('salut') }} ">Home</a>
             <a href=" {{ route('articles.index') }} ">Articles</a>
+            <a href=" {{ route('article_categories.index') }} ">Categories</a>
             <a href=" {{ route('rating.index') }} ">Rating</a>
             <a href=" {{ route('about') }} ">About us</a>
         </div>

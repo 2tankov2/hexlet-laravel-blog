@@ -10,7 +10,7 @@
                 <a class="text-warning stretched-link font-weight-bold" href=" {{ route('articles.show', ['id' => $article->id]) }} ">{{ $article->name }}</a>
                 <small>
                     (<a href=" {{ route('articles.edit', ['id' => $article->id]) }} ">редактировать</a>)
-                    (<a href=" {{ route('articles.destroy', ['id' => $article->id]) }} " data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Удалить</a>)
+                    [<a href=" {{ route('articles.destroy', ['id' => $article->id]) }} " data-confirm="Вы уверены?" data-method="delete" rel="nofollow">X</a>]
                 </small>
             </li>
         @endforeach

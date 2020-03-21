@@ -44,3 +44,5 @@ Route::get('/articles/{id}', 'ArticleController@show')
 
 Route::delete('/articles/{id}', 'ArticleController@destroy')
     ->name('articles.destroy');
+
+Route::resource('/article_categories', 'ArticleCategoryController');
